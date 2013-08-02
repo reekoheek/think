@@ -1,0 +1,1 @@
+Title: <?php echo $entry['title'] ?>
