@@ -4,6 +4,86 @@
 		"selected_items":
 		[
 			[
+				"path",
+				"pathInfo"
+			],
+			[
+				"ex",
+				"extension"
+			],
+			[
+				"mim",
+				"mimeClass"
+			],
+			[
+				"con",
+				"contentType"
+			],
+			[
+				"array_",
+				"array_values"
+			],
+			[
+				"debu",
+				"debug_print_backtrace"
+			],
+			[
+				"hea",
+				"headers"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"pro",
+				"provider"
+			],
+			[
+				"Provide",
+				"ProviderRepository"
+			],
+			[
+				"mo",
+				"modified"
+			],
+			[
+				"array_ke",
+				"array_key_exists"
+			],
+			[
+				"col",
+				"collection"
+			],
+			[
+				"model",
+				"modelArray"
+			],
+			[
+				"assert",
+				"assertTrue"
+			],
+			[
+				"asse",
+				"assertTrue"
+			],
+			[
+				"coll",
+				"collection"
+			],
+			[
+				"co",
+				"collection"
+			],
+			[
+				"call_us",
+				"call_user_func_array"
+			],
+			[
+				"call_me",
+				"call_user_method_array"
+			],
+			[
 				"connection",
 				"connectionString"
 			],
@@ -18,10 +98,6 @@
 			[
 				"conn",
 				"connectionName"
-			],
-			[
-				"con",
-				"configItem"
 			],
 			[
 				"get_ar",
@@ -156,10 +232,6 @@
 				"validation"
 			],
 			[
-				"model",
-				"modelRules"
-			],
-			[
 				"kendo",
 				"kendoDropDownList"
 			],
@@ -216,10 +288,6 @@
 				"Deferred"
 			],
 			[
-				"pro",
-				"promise"
-			],
-			[
 				"when",
 				"whenConditions"
 			],
@@ -254,10 +322,6 @@
 			[
 				"ar",
 				"arguments"
-			],
-			[
-				"ex",
-				"exploded"
 			],
 			[
 				"ext",
@@ -412,10 +476,6 @@
 				"obfuscation-layer"
 			],
 			[
-				"coll",
-				"collapsible"
-			],
-			[
 				"over",
 				"overlay-content"
 			],
@@ -454,73 +514,13 @@
 			[
 				"set",
 				"setTimeout"
-			],
-			[
-				"pos",
-				"position"
-			],
-			[
-				"bg",
-				"getBgSize"
-			],
-			[
-				"scroll",
-				"scrollTop"
-			],
-			[
-				"bod",
-				"border"
-			],
-			[
-				"sele",
-				"selectedImage"
-			],
-			[
-				"wra",
-				"wrapperObject"
-			],
-			[
-				"men",
-				"menuHtml"
-			],
-			[
-				"background-",
-				"background-image"
-			],
-			[
-				"tmp",
-				"tmpfile"
-			],
-			[
-				"max",
-				"max_satisfied"
-			],
-			[
-				"ma",
-				"maxSatisfied"
-			],
-			[
-				"pack",
-				"package"
-			],
-			[
-				"req",
-				"request"
-			],
-			[
-				"exi",
-				"existsSync"
-			],
-			[
-				"pub",
-				"publish"
 			]
 		]
 	},
 	"build_system": "Packages/User/rme-ember.sublime-build",
 	"command_palette":
 	{
-		"height": 92.0,
+		"height": 212.0,
 		"selected_items":
 		[
 			[
@@ -657,21 +657,35 @@
 	},
 	"file_history":
 	[
+		"/home/jafar/workspaces/php/own/think/config/config-development.php",
+		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Http/Response.php",
+		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Http/Request.php",
+		"/home/jafar/workspaces/php/own/think/src/Bono/App.php",
+		"/home/jafar/workspaces/php/own/think/src/Bono/Http/Request.php",
+		"/home/jafar/workspaces/php/own/think/src/Bono/Provider/ContentNegotiatorProvider.php",
+		"/home/jafar/workspaces/php/own/think/src/Norm/NormProvider.php",
+		"/home/jafar/workspaces/php/own/think/src/Bono/Provider/ProviderRepository.php",
+		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Slim.php",
+		"/home/jafar/workspaces/php/own/think/src/App/Controllers/Task.php",
+		"/home/jafar/workspaces/php/own/think/templates/task/read.php",
+		"/home/jafar/workspaces/php/own/think/src/Norm/Norm.php",
+		"/home/jafar/workspaces/php/own/think/config/config.php",
+		"/home/jafar/workspaces/php/own/think/templates/task/search.php",
+		"/home/jafar/workspaces/php/own/think/src/Bono/Controller.php",
+		"/home/jafar/workspaces/php/own/think/src/Norm/Connection/MongoConnection.php",
+		"/home/jafar/workspaces/php/own/think/test/Norm/ModelTest.php",
+		"/home/jafar/workspaces/php/own/think/src/Norm/Collection.php",
+		"/home/jafar/workspaces/php/own/think/src/Norm/Model.php",
+		"/home/jafar/workspaces/php/own/think/src/Norm/Connection.php",
+		"/home/jafar/workspaces/php/own/think/test/Norm/ConnectionTest.php",
 		"/home/jafar/workspaces/php/own/think/test/Norm/NormTest.php",
 		"/home/jafar/workspaces/php/own/think/www/mongo.php",
-		"/home/jafar/workspaces/php/own/think/src/Norm/Connection/MongoConnection.php",
 		"/home/jafar/workspaces/php/own/think/www/index.php",
-		"/home/jafar/workspaces/php/own/think/src/App/Controllers/Task.php",
-		"/home/jafar/workspaces/php/own/think/templates/task/search.php",
-		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Slim.php",
-		"/home/jafar/workspaces/php/own/think/src/Bono/App.php",
 		"/home/jafar/workspaces/php/own/think/composer.json",
 		"/home/jafar/workspaces/php/own/think/test/Norm/Norm.php",
-		"/home/jafar/workspaces/php/own/think/src/Norm/Connection.php",
 		"/home/jafar/workspaces/php/own/think/test/TaskTest.php",
 		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Router.php",
 		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Route.php",
-		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Http/Request.php",
 		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/View.php",
 		"/home/jafar/workspaces/php/own/think/templates/hello.php",
 		"/home/jafar/workspaces/php/own/think/src/App/config.php",
@@ -679,7 +693,6 @@
 		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Middleware/PrettyExceptions.php",
 		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Middleware/MethodOverride.php",
 		"/home/jafar/workspaces/php/own/think/vendor/slim/slim/Slim/Middleware/Flash.php",
-		"/home/jafar/workspaces/php/own/think/src/Bono/Controller.php",
 		"/home/jafar/workspaces/php/own/think/composer.lock",
 		"/home/jafar/workspaces/php/own/think/src/App/Bootstrap.php",
 		"/home/jafar/workspaces/php/own/think/src/App/config-development.php",
@@ -771,20 +784,7 @@
 		"/home/jafar/workspaces/php/hertz/cordovaapp/js/libs/kui/kendo.mobile.all.min.css",
 		"/home/jafar/workspaces/php/hertz/test/css/kendo.common.min.css",
 		"/home/jafar/workspaces/php/hertz/neo2/vendor/kendoui/kendo.mobile.all.min.css",
-		"/home/jafar/workspaces/php/hertz/cordovaapp/js/app/models/join.js",
-		"/home/jafar/workspaces/php/hertz/neo/vendor/kendo-backbone/transport.js",
-		"/home/jafar/workspaces/php/CoreWEB-jkt/assets/js/libs/kendo-backbone/transport.js",
-		"/home/jafar/workspaces/php/CoreWEB-jkt/assets/js/libs/kendo.mobile.min.js",
-		"/home/jafar/workspaces/php/hertz/cordovaapp/js/libs/kui/kendo.all.min.js",
-		"/home/jafar/workspaces/php/CoreWEB-jkt/assets/js/libs/kendo.all.min.js",
-		"/home/jafar/workspaces/php/CoreWEB-jkt/assets/html/cordova/emember/login.html",
-		"/home/jafar/workspaces/php/CoreWEB-jkt/assets/css/cordova/global.css",
-		"/home/jafar/workspaces/php/hertz/project.sublime-project",
-		"/home/jafar/workspaces/php/hertz/rentacar/assets/000/config.php",
-		"/home/jafar/workspaces/java/CoreWEB/assets/js/cordova/views/app/viewport.js",
-		"/home/jafar/workspaces/php/hertz/neo/vendor/hertz/js/hertz.ui.view.js",
-		"/home/jafar/workspaces/java/CoreWEB/assets/js/cordova/app.js",
-		"/home/jafar/workspaces/java/CoreWEB/assets/js/utils/htzmobile.js"
+		"/home/jafar/workspaces/php/hertz/cordovaapp/js/app/models/join.js"
 	],
 	"find":
 	{
@@ -930,6 +930,44 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Norm::factory($this->name)",
+			"name",
+			"($this->name",
+			"$this->name",
+			"clazz",
+			"protected",
+			"var_dump",
+			"content-type",
+			"CONTENT_CLASS_TYPE",
+			"accept",
+			"getContent",
+			"pathinfo",
+			"Url(",
+			"url",
+			"app->request",
+			"acceptType",
+			"->request",
+			"Request",
+			"new Request",
+			"new Request()",
+			"Request()",
+			"Request",
+			"function getResourceUri",
+			"contentType",
+			"$this->env",
+			"function set(",
+			"set(",
+			"->env",
+			"getPathInfo",
+			"$this",
+			"foo",
+			"collection",
+			"delete",
+			"$a",
+			"find",
+			"var_dump",
+			"connection",
+			"Inflector",
 			"protected",
 			"foo",
 			"read\n",
@@ -1019,45 +1057,7 @@
 			"push_net_value",
 			"get_container_settings",
 			"filename",
-			"subprocess",
-			"_run",
-			"lxc/",
-			"ok",
-			"writelines",
-			"save_cgroup_devices",
-			"writelines",
-			"file",
-			"/edit",
-			"redirect",
-			"Undefined",
-			"/action",
-			"get_container_settings",
-			"/default/lxc",
-			"_run",
-			"start",
-			"complete",
-			"hostname",
-			"utsname",
-			"lxc.utsname",
-			"lxc",
-			"def listx",
-			"listx\ncontainers_all",
-			"containers_all",
-			"containers",
-			"url_for",
-			"host_memory_usage",
-			"print",
-			"lxc.container",
-			"sqlite",
-			"login",
-			"create table",
-			"g.db",
-			"connect_db",
-			"sqlite",
-			"cron",
-			"var/log",
-			"mkdir",
-			"\n    "
+			"subprocess"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1158,6 +1158,70 @@
 		"selected_items":
 		[
 			[
+				"mong",
+				"src/Norm/Connection/MongoConnection.php"
+			],
+			[
+				"model",
+				"src/Norm/Model.php"
+			],
+			[
+				"respon",
+				"vendor/slim/slim/Slim/Http/Response.php"
+			],
+			[
+				"req",
+				"src/Bono/Http/Request.php"
+			],
+			[
+				"conten",
+				"src/Bono/Provider/ContentNegotiatorProvider.php"
+			],
+			[
+				"task",
+				"src/App/Controllers/Task.php"
+			],
+			[
+				"requ",
+				"vendor/slim/slim/Slim/Http/Request.php"
+			],
+			[
+				"slim",
+				"vendor/slim/slim/Slim/Slim.php"
+			],
+			[
+				"reque",
+				"vendor/slim/slim/Slim/Http/Request.php"
+			],
+			[
+				"app",
+				"src/Bono/App.php"
+			],
+			[
+				"nor",
+				"src/Norm/NormProvider.php"
+			],
+			[
+				"contr",
+				"src/Bono/Controller.php"
+			],
+			[
+				"norm",
+				"src/Norm/Norm.php"
+			],
+			[
+				"modelte",
+				"test/Norm/ModelTest.php"
+			],
+			[
+				"conne",
+				"src/Norm/Connection.php"
+			],
+			[
+				"mongo",
+				"src/Norm/Connection/MongoConnection.php"
+			],
+			[
 				"mongoc",
 				"src/Norm/Connection/MongoConnection.php"
 			],
@@ -1170,16 +1234,8 @@
 				"vendor/slim/slim/Slim/Router.php"
 			],
 			[
-				"req",
-				"vendor/slim/slim/Slim/Http/Request.php"
-			],
-			[
 				"view",
 				"vendor/slim/slim/Slim/View.php"
-			],
-			[
-				"slim",
-				"vendor/slim/slim/Slim/Slim.php"
 			],
 			[
 				"app.",
@@ -1612,62 +1668,6 @@
 			[
 				"neo2inde",
 				"hertz/neo2/index.html"
-			],
-			[
-				"neoindex",
-				"hertz/neo/index.html"
-			],
-			[
-				"corewebjoin",
-				"CoreWEB/assets/js/cordova/views/emember/join.js"
-			],
-			[
-				"corjoin.js",
-				"hertz/cordovaapp/js/app/models/join.js"
-			],
-			[
-				"corewelogin.js",
-				"CoreWEB/assets/js/views/emember/login/login.js"
-			],
-			[
-				"coreweblogin.html",
-				"CoreWEB/assets/html/cordova/emember/login.html"
-			],
-			[
-				"login.js",
-				"hertz/cordovaapp/js/app/views/login.js"
-			],
-			[
-				"css.",
-				"CoreWEB/assets/css.jsp"
-			],
-			[
-				"_htm",
-				"hertz/rentacar/assets/000/_html.php"
-			],
-			[
-				"vehiclepage.",
-				"CoreWEB/assets/html/all/reservation/vehicle/vehiclePage.html"
-			],
-			[
-				"vehiclepage",
-				"CoreWEB/assets/tpl/all/reservation/vehicle/vehiclePage.tpl"
-			],
-			[
-				"coreweblogin.js",
-				"CoreWEB/assets/js/views/emember/login/login.js"
-			],
-			[
-				"loginv",
-				"CoreWEB/emember/loginView.jsp"
-			],
-			[
-				"login",
-				"hertz/cordovaapp/js/app/views/login.js"
-			],
-			[
-				"/assets/js/views/emember/login/login.js",
-				"CoreWEB/assets/js/views/emember/login/login.js"
 			]
 		],
 		"width": 0.0

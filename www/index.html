@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Think</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <link rel="apple-touch-icon" href="vendor/think/img/favicon.png" />
+    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-ipadh.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />
+    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-ipadv.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />
+    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-iphoneh.png" media="screen and (min-device-width: 321px) and (min-device-width: 480px)" />
+    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-iphonev.png" media="screen and (max-device-width: 320px)" />
+
+    <link rel="icon" type="image/ico" href="vendor/think/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-ico" href="vendor/think/img/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="vendor/think/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/xin/css/xin.css" />
+</head>
+
+<body data-role="app">
+
+    <div class="xin-viewport">
+
+        <div style="border: 1px solid red; width: 100%; padding: 10px; text-align: center">
+            <a href="#login">Login</a> |
+            <a href="#home">Home</a>
+        </div>
+
+        <div data-role="pager" data-transition="slide" class="xin-pager">
+            <div data-role="think.view.Login" data-uri="login">
+                <form>
+                    <label>
+                        <span>Username</span>
+                        <input type="text" />
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <input type="text" />
+                    </label>
+                    <input type="submit" />
+                </form>
+            </div>
+            <div data-role="think.view.Home"
+                data-uri="home"
+                data-uri-default="true"
+                class="v-home"
+                data-collection="think.collection.tasks">
+                <div data-role="think.view.Add"
+                    data-collection="think.collection.tasks">
+                    <form>
+                        <label>
+                            <span>Add</span>
+                            <input type="text" name="subject" />
+                        </label>
+                    </form>
+                </div>
+                <div data-role="list" data-collection="think.collection.tasks" id="home-list">
+                    <table>
+                        <tbody>
+                            <tr data-role="list-item">
+                                <td>
+                                    <%= model.get('subject') %>
+                                </td>
+                                <td style="width:1px">
+                                    [<a href="#remove" data-cid="<%= model.cid %>">remove</a>]
+                                </td>
+                            </tr>
+                            <tr data-role="list-empty">
+                                <td style="text-align: center">
+                                    Empty
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="vendor/zepto/zepto.min.js"></script>
+    <script type="text/javascript" src="vendor/zepto/data.js"></script>
+    <script type="text/javascript" src="vendor/simply-deferred/deferred.js"></script>
+    <script type="text/javascript" src="vendor/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="vendor/backbone/backbone.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.global.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.application.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.ioc.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.router.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.ui.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.fx.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.directive.js"></script>
+    <script type="text/javascript" src="vendor/think/js/app.js"></script>
+</body>
+</html>

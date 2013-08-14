@@ -10,4 +10,5 @@ return array(
             'database' => 'think',
         ),
     ),
+    'bono.forceMimeType' => 'json'
 );

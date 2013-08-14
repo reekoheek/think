@@ -8,7 +8,7 @@ use Norm\Norm;
 class Task extends Controller {
 
     public function search() {
-        $entries = Norm::factory($this->name)->find();
+        $entries = Norm::factory($this->clazz)->find();
 
         return array(
             'entries' => $entries,
@@ -16,14 +16,18 @@ class Task extends Controller {
     }
 
     public function create() {
-        $model = Norm::factory($this->name)->newInstance();
-        $model->set($_POST);
-        $model->save();
+        $model = Norm::factory($this->clazz)->newInstance();
+        $model->set($this->app->request->post());
+        $result = $model->save();
+
+        return array(
+            'entry' => $model->toArray(),
+        );
     }
 
     public function read($id) {
-        $criteria = array( '_id' => $id );
-        $model = Norm::factory($this->name)->findOne($criteria);
+        $criteria = array( '$id' => $id );
+        $model = Norm::factory($this->clazz)->findOne($criteria);
         if ($model) {
             return array(
                 'entry' => $model->toArray(),
@@ -36,7 +40,11 @@ class Task extends Controller {
     }
 
     public function delete($id) {
-
+        $criteria = array( '$id' => $id );
+        $model = Norm::factory($this->clazz)->findOne($criteria);
+        if ($model) {
+            $model->remove();
+        }
     }
 
     public function getViewFor($for) {
