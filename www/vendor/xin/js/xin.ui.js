@@ -7,7 +7,6 @@
     window.xin.ui = window.xin.ui || {};
 
     var Outlet = Backbone.View.extend({
-
     });
     window.xin.ui.Outlet = Outlet;
 
@@ -20,22 +19,14 @@
         },
 
         addChild: function(view) {
-            var that = this;
-            view._oldshow = view.show;
-            view.show = function() {
-                that.showChild(view).done(function() {
-                    if (view._oldshow) {
-                        view._oldshow();
-                    }
-                });
-            };
-
             var object = {};
             object[view.cid] = view;
             _.extend(this.pages, object);
 
             this.pageKeys = _.keys(this.pages);
             this.pageValues = _.values(this.pages);
+
+            view.parent = this;
 
             return this;
         },
@@ -147,11 +138,15 @@
 
     _.extend(window.xin.ui, {
         show: function(view) {
-            if (view.show) {
-                view.show();
-            } else {
-                view.$el.addClass('xin-show');
-            }
+            _.defer(function() {
+                if (view.parent && view.parent.showChild) {
+                    view.parent.showChild(view).done(function() {
+                        view.$el.addClass('xin-show');
+                    });
+                } else {
+                   view.$el.addClass('xin-show');
+                }
+            });
         }
     });
 

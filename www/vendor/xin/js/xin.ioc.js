@@ -59,8 +59,10 @@
                 index++;
                 if (index == keys.length) {
                     to[k] = value;
-                } else if (!to[k]) {
-                    to[k] = {};
+                } else {
+                    if (!to[k]) {
+                        to[k] = {};
+                    }
                     to = to[k];
                 }
             });
@@ -191,6 +193,10 @@
                 return resolver(key).then(function(data) {
                         return xin.Deferred().resolve(_.template(data));
                     }, null);
+            },
+
+            model: function(key) {
+                return this.resolve(key);
             },
 
             collection: function(key) {

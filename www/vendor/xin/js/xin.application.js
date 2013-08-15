@@ -8,7 +8,8 @@
         this.initialize.apply(this, arguments);
     };
 
-    _.extend(Application.prototype, {
+    _.extend(Application.prototype, Backbone.Events, {
+        middlewares: [],
         initialize: function(options) {
 
             options = options || {};
@@ -16,10 +17,15 @@
             this.container = new xin.IoC();
             this.router = options.router || new xin.Router();
             this.router.app = this;
+
             this.directiveManager = new xin.DirectiveManager(this);
 
             this.$el = $(options.el);
             this.$el.addClass('xin-app').attr('data-role', 'app');
+
+            this.providerRepository = new xin.ProviderRepository(this);
+
+            xin.app = xin.app || this;
         },
 
         remove: function() {
@@ -27,11 +33,14 @@
         },
 
         start: function() {
-            if (typeof this.router.start === 'function') {
-                this.router.start();
-            } else {
-                Backbone.history.start();
-            }
+            var that = this;
+            this.providerRepository.initialize().done(function() {
+                if (typeof that.router.start === 'function') {
+                    that.router.start();
+                } else {
+                    Backbone.history.start();
+                }
+            });
         },
 
         set: function() {
@@ -46,8 +55,8 @@
             return this.container.resolve.apply(this.container, arguments);
         },
 
-        viewForURI: function() {
-
+        use: function(middleware) {
+            this.router.use(middleware);
         }
     });
 

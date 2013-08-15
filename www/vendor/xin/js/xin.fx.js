@@ -27,9 +27,10 @@
             this.$el.css('-webkit-transform', 'translate3d(' + from + ', 0, 0)');
             this.$el.css('transition', 'all ' + that.timeout + 's');
             that.$el.addClass('xin-show');
-            _.defer(function() {
+
+            setTimeout(function() {
                 that.$el.css('-webkit-transform', 'translate3d(0, 0, 0)');
-            });
+            }, 10);
 
             return deferred.promise();
         }
@@ -56,13 +57,13 @@
             this.$el.css('-webkit-transform', 'translate3d(0, 0, 0)');
             this.$el.css('transition', 'all ' + that.timeout + 's');
 
-            _.defer(function() {
+            setTimeout(function() {
                 var to = '100%';
                 if (that.to == 'left') {
                     to = '-' + to;
                 }
                 that.$el.css('-webkit-transform', 'translate3d(' + to + ', 0, 0)');
-            });
+            }, 10);
 
             return deferred.promise();
         }

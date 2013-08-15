@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -17,48 +17,58 @@
     <link rel="icon" type="image/ico" href="vendor/think/img/favicon.ico" />
     <link rel="shortcut icon" type="image/x-ico" href="vendor/think/img/favicon.ico" />
 
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="vendor/think/css/global.css" />
     <link rel="stylesheet" type="text/css" href="vendor/xin/css/xin.css" />
 </head>
 
 <body data-role="app">
 
-    <div class="xin-viewport">
+    <div class="xin-viewport container">
 
-        <div style="border: 1px solid red; width: 100%; padding: 10px; text-align: center">
-            <a href="#login">Login</a> |
-            <a href="#home">Home</a>
+        <div class="navbar">
+            <div class="think-user-menu">
+                <span></span> | <a href="#logout">Logout</a>
+            </div>
+            <div class="think-global-menu">
+                Think
+            </div>
         </div>
 
         <div data-role="pager" data-transition="slide" class="xin-pager">
-            <div data-role="think.view.Login" data-uri="login">
-                <form>
-                    <label>
-                        <span>Username</span>
-                        <input type="text" />
-                    </label>
-                    <label>
-                        <span>Password</span>
-                        <input type="text" />
-                    </label>
-                    <input type="submit" />
+            <div data-role="think.view.Login"
+                data-uri="login"
+                data-model="app.user">
+                <form role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <input type="text" autocomplete="off" class="form-control" name="login" placeholder="Enter login" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" autocomplete="off" class="form-control" name="password" placeholder="Enter password" />
+                        </div>
+                        <div class="row">
+                            <input type="submit" class="btn btn-default col-xs-12" value="Login" />
+                        </div>
+                    </fieldset>
                 </form>
             </div>
             <div data-role="think.view.Home"
                 data-uri="home"
                 data-uri-default="true"
-                class="v-home"
-                data-collection="think.collection.tasks">
+                data-collection="app.tasks"
+                class="v-home">
                 <div data-role="think.view.Add"
-                    data-collection="think.collection.tasks">
+                    data-collection="app.tasks">
                     <form>
-                        <label>
-                            <span>Add</span>
-                            <input type="text" name="subject" />
-                        </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" placeholder="Subject" />
+                        </div>
                     </form>
                 </div>
-                <div data-role="list" data-collection="think.collection.tasks" id="home-list">
+                <div data-role="list" data-collection="app.tasks" id="home-list">
                     <table>
                         <tbody>
                             <tr data-role="list-item">
@@ -70,7 +80,7 @@
                                 </td>
                             </tr>
                             <tr data-role="list-empty">
-                                <td style="text-align: center">
+                                <td style="text-align: center" colspan="2">
                                     Empty
                                 </td>
                             </tr>
@@ -82,17 +92,33 @@
     </div>
 
     <script type="text/javascript" src="vendor/zepto/zepto.min.js"></script>
+
+    <!-- workaround script to mimick jquery for zepto -->
     <script type="text/javascript" src="vendor/zepto/data.js"></script>
     <script type="text/javascript" src="vendor/simply-deferred/deferred.js"></script>
+    <script type="text/javascript">
+        jQuery = $;
+    </script>
+    <!-- end workaround script to mimick jquery for zepto -->
+
+    <!-- underscore and backbone -->
     <script type="text/javascript" src="vendor/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="vendor/backbone/backbone.js"></script>
+    <!-- end underscore and backbone -->
+
+    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- xin -->
     <script type="text/javascript" src="vendor/xin/js/xin.global.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.application.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.provider.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.ioc.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.router.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.ui.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.fx.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.directive.js"></script>
+    <!-- end xin -->
+
     <script type="text/javascript" src="vendor/think/js/app.js"></script>
 </body>
 </html>

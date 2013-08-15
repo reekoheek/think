@@ -3,23 +3,21 @@
         "reekoheek/bono": "dev-master",
         "reekoheek/norm": "dev-master"
     },
-
-    "require-dev": {
-        "phpunit/phpunit": "3.7.22"
-    },
     "repositories": [
         {
             "type": "vcs",
-            "url": "file:///home/jafar/workspaces/php/own/bono/.git"
+            "url": "git@github.com:reekoheek/bono.git"
         },
         {
             "type": "vcs",
-            "url": "file:///home/jafar/workspaces/php/own/norm/.git"
+            "url": "git@github.com:reekoheek/norm.git"
         }
     ],
     "autoload": {
         "psr-0": {
-            "App": "src/"
+            "App": "src/",
+            "Bono": "../bono/src/",
+            "Norm": "../norm/src/"
         }
     }
 }

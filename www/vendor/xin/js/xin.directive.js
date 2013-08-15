@@ -212,11 +212,13 @@
             Backbone.history.handlers.push({
                 route: /^(.*?)$/,
                 callback: function(splats) {
-                    if (splats === '') {
-                        location.hash = that.defaultRoute;
-                    } else {
-                        routeMissing.apply(this, arguments);
-                    }
+                    _.defer(function() {
+                        if (splats === '') {
+                            location.hash = that.defaultRoute;
+                        } else {
+                            routeMissing.apply(that, arguments);
+                        }
+                    });
                 }
             });
 
@@ -247,9 +249,12 @@
             // console.log('URIDirective done', $el.data('instance'));
             deferred.resolve();
 
-            this.app.router.route($el.data('uri'), function() {
+            var callback = function() {
                 xin.ui.show($el.data('instance'));
-            });
+            };
+            callback.options = $el.data('instance').options;
+
+            this.app.router.route($el.data('uri'), callback);
 
             return deferred.promise();
         }

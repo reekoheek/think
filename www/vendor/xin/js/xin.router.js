@@ -4,6 +4,7 @@
     window.xin = window.xin || {};
 
     var Router = function() {
+        this.middlewares = [];
         Backbone.Router.apply(this, arguments);
     };
 
@@ -29,6 +30,52 @@
                     view.$el.addClass('hz-show');
                 }
             }
+        },
+
+        route: function(route) {
+            var callback,
+                callbacks = [],
+                router = this;
+
+            if (arguments.length > 1) {
+                for(var i = 1; i < arguments.length; i++) {
+                    callbacks.push(callback = arguments[i]);
+                }
+            }
+
+            Backbone.Router.prototype.route.call(this, route, function() {
+                var args = arguments;
+
+                router.runMiddleware.call(router, callback.options || {}).done(function() {
+                    callback.apply(router, args);
+                });
+            });
+        },
+
+        use: function(middleware) {
+            middleware.app = this.app;
+            this.middlewares.push(middleware);
+        },
+
+        runMiddleware: function(options) {
+            var app = this.app,
+                promise = null;
+
+            _.each(this.middlewares, function(middleware) {
+                if (!promise) {
+                    promise = middleware.call(options);
+                } else {
+                    promise = promise.pipe(function() {
+                        return middleware.call(options);
+                    });
+                }
+            });
+
+            if (!promise) {
+                promise = $.Deferred().resolve().promise();
+            }
+
+            return promise;
         }
     });
 
