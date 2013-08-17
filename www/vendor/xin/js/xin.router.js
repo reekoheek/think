@@ -65,7 +65,7 @@
                 if (!promise) {
                     promise = middleware.call(options);
                 } else {
-                    promise = promise.pipe(function() {
+                    promise = promise.then(function() {
                         return middleware.call(options);
                     });
                 }

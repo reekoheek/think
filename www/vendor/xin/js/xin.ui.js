@@ -7,15 +7,29 @@
     window.xin.ui = window.xin.ui || {};
 
     var Outlet = Backbone.View.extend({
+        initialize: function(options) {
+            this.template = options.template || null;
+        },
+
+        render: function() {
+            if (this.template) {
+                this.$el.html(this.template(this));
+            }
+            return this;
+        },
     });
     window.xin.ui.Outlet = Outlet;
 
     var Pager = Outlet.extend({
 
         initialize: function(options) {
+            this.constructor.__super__.initialize.apply(this, arguments);
+
             this.transition = options.transition || 'plain';
             this.activePage = null;
             this.pages = {};
+
+            this.$el.addClass('xin-pager');
         },
 
         addChild: function(view) {
@@ -43,8 +57,6 @@
                 outIndex = _.indexOf(this.pageValues, this.activePage);
             }
 
-            // console.log(inIndex, outIndex);
-            //
             this.$el.scrollTop(0);
 
             xin.ui.Pager.transitions[this.transition](this, view, this.activePage, outIndex - inIndex)
@@ -110,7 +122,6 @@
         render: function() {
             // TODO template exist? do render template first
             // no template render here
-
             if (!this.collection.length) {
                 if (this.emptyTemplate) {
                     this.$('[data-empty-attach-point]').html('');

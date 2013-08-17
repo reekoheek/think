@@ -15,7 +15,7 @@
 
             this.$el.on('webkitTransitionEnd', function() {
                 that.$el.off('webkitTransitionEnd');
-                that.$el.css('transition', '');
+                that.$el.css('-webkit-transition', '');
                 deferred.resolve();
             });
 
@@ -25,12 +25,12 @@
             }
 
             this.$el.css('-webkit-transform', 'translate3d(' + from + ', 0, 0)');
-            this.$el.css('transition', 'all ' + that.timeout + 's');
+            this.$el.css('-webkit-transition', 'all ' + that.timeout + 's');
             that.$el.addClass('xin-show');
 
             setTimeout(function() {
                 that.$el.css('-webkit-transform', 'translate3d(0, 0, 0)');
-            }, 10);
+            }, xin.fx.defaultOptions.delay);
 
             return deferred.promise();
         }
@@ -49,13 +49,13 @@
 
             this.$el.on('webkitTransitionEnd', function() {
                 that.$el.off('webkitTransitionEnd');
-                that.$el.css('transition', '');
                 that.$el.removeClass('xin-show');
+                that.$el.css('-webkit-transition', '');
                 deferred.resolve();
             });
 
             this.$el.css('-webkit-transform', 'translate3d(0, 0, 0)');
-            this.$el.css('transition', 'all ' + that.timeout + 's');
+            this.$el.css('-webkit-transition', 'all ' + that.timeout + 's');
 
             setTimeout(function() {
                 var to = '100%';
@@ -63,13 +63,16 @@
                     to = '-' + to;
                 }
                 that.$el.css('-webkit-transform', 'translate3d(' + to + ', 0, 0)');
-            }, 10);
+            }, xin.fx.defaultOptions.delay);
 
             return deferred.promise();
         }
     });
 
     window.xin.fx = {
+        defaultOptions: {
+            delay: 50,
+        },
         SlideIn: SlideIn,
         SlideOut: SlideOut,
     };

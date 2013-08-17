@@ -1,58 +1,5 @@
-/*html,
-button,
-input,
-select,
-textarea {
-    color: #222;
-}
-
-body {
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-img {
-    vertical-align: middle;
-}
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-textarea {
-    resize: vertical;
-}*/
-
-/****************************************************************************/
-
-/*body,
-html { width:100%; height:100%; padding:0; margin:0 }
-
-body {
-    color:#333;
-    font:15px/130% 'Trebuchet MS', Helvetica, sans-serif;
-    min-width: 0;
+/*body {
+    font-size: 20px;
 }*/
 
 /***************************************************************************/
@@ -70,24 +17,35 @@ body {
     color: inherit;
 }
 
-/***************************************************************************/
-
-.xin-viewport .navbar {
-    width: 100%;
-    padding: 10px;
-    text-align: center
+.form-group {
+    overflow: auto;
 }
 
-/*.v-home {
-    padding: 10px;
+/***************************************************************************/
+
+.xin-app .navbar {
+    width: 100%;
+    line-height: 48px;
+    text-align: center;
+    z-index: 1000;
+    margin-bottom: 0;
+}
+
+/*.xin-app .navbar > div {
+    display: none;
 }*/
 
-.v-home table {
+.xin-app .think-pager > div {
+    padding-top: 20px;
+    display: none;
+}
+
+.xin-app .v-home table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.v-home td {
+.xin-app .v-home td {
     border-bottom: 1px dashed #eee;
     padding: 5px;
 }

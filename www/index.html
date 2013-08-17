@@ -18,42 +18,25 @@
     <link rel="shortcut icon" type="image/x-ico" href="vendor/think/img/favicon.ico" />
 
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap-glyphicons.css" />
     <link rel="stylesheet" type="text/css" href="vendor/think/css/global.css" />
     <link rel="stylesheet" type="text/css" href="vendor/xin/css/xin.css" />
 </head>
 
-<body data-role="app">
+<body data-role="app" class="xin-app">
+
 
     <div class="xin-viewport container">
-
-        <div class="navbar">
-            <div class="think-user-menu">
-                <span></span> | <a href="#logout">Logout</a>
-            </div>
-            <div class="think-global-menu">
-                Think
-            </div>
+        <div data-role="view"
+            data-template="vendor/think/templates/navbar.html" class="navbar">
         </div>
 
-        <div data-role="pager" data-transition="slide" class="xin-pager">
+        <div data-role="pager" data-transition="slide" class="think-pager">
             <div data-role="think.view.Login"
                 data-uri="login"
-                data-model="app.user">
-                <form role="form">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="login">Login</label>
-                            <input type="text" autocomplete="off" class="form-control" name="login" placeholder="Enter login" />
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" autocomplete="off" class="form-control" name="password" placeholder="Enter password" />
-                        </div>
-                        <div class="row">
-                            <input type="submit" class="btn btn-default col-xs-12" value="Login" />
-                        </div>
-                    </fieldset>
-                </form>
+                data-model="app.user"
+                data-template="vendor/think/templates/login.html"
+                class="v-login">
             </div>
             <div data-role="think.view.Home"
                 data-uri="home"
@@ -70,21 +53,25 @@
                 </div>
                 <div data-role="list" data-collection="app.tasks" id="home-list">
                     <table>
-                        <tbody>
-                            <tr data-role="list-item">
-                                <td>
-                                    <%= model.get('subject') %>
-                                </td>
-                                <td style="width:1px">
-                                    [<a href="#remove" data-cid="<%= model.cid %>">remove</a>]
-                                </td>
-                            </tr>
-                            <tr data-role="list-empty">
-                                <td style="text-align: center" colspan="2">
-                                    Empty
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tr data-role="list-item" class="row">
+                            <td>
+                                <%= model.get('subject') %>
+                            </td>
+                            <td style="width:1px">
+                                <!-- a href="#xxx" class="navbar-toggle">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </a -->
+                                <a href="#remove" data-cid="<%= model.cid %>" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-role="list-empty">
+                            <td style="text-align: center" colspan="2">
+                                Empty
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

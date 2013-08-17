@@ -31,7 +31,6 @@
                 $('.think-user-menu').show();
                 $('.think-global-menu').hide();
             } else {
-                user.logout();
                 $('.think-user-menu').hide();
                 $('.think-global-menu').show();
             }
@@ -148,7 +147,9 @@
                 entry.isLogin = true;
                 that.set(entry);
                 that.save();
-                deferred.resolve(that);
+                _.defer(function() {
+                    deferred.resolve(that);
+                });
             }).fail(function() {
                 deferred.reject(that);
             });
@@ -223,13 +224,16 @@
     /**
      * think.view.Login
      */
-    think.view.Login = Backbone.View.extend({
+    think.view.Login = xin.ui.Outlet.extend({
         events: {
             'submit form': 'login'
         },
 
         login: function(evt) {
             evt.preventDefault();
+
+            this.$('input').blur();
+
             var form = this.$('form').serializeObject();
             this.model.login(form.login, form.password).done(function() {
                 location.hash = '';
@@ -251,11 +255,12 @@
             evt.preventDefault();
 
             var form = this.$('form').serializeObject(),
-                user = this.options.app.get('app.user');
+                user = this.options.app.get('app.user'),
+                model;
 
             form.userId = user.get('$id');
 
-            var model = new this.collection.model(form);
+            model = new this.collection.model(form);
             model.save();
 
             this.collection.add(model);
@@ -267,20 +272,24 @@
     /**
      * think.view.Home
      */
-    think.view.Home = Backbone.View.extend({
+    think.view.Home = xin.ui.Outlet.extend({
         events: {
             'click a[href="#remove"]': 'remove'
         },
 
         remove: function(evt) {
+
             evt.preventDefault();
-            var cid = $(evt.target).data('cid');
 
-            var model = this.collection.get(cid);
+            if (confirm('Are you sure?')) {
+                var cid = $(evt.target).data('cid'),
+                    model = this.collection.get(cid);
 
-            this.collection.remove(model);
+                this.collection.remove(model);
 
-            model.destroy();
+                model.destroy();
+            }
+
         }
     });
 

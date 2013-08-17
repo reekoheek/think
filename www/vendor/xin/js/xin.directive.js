@@ -34,7 +34,7 @@
                     if (!promise) {
                         promise = directive.run($el);
                     } else {
-                        promise = promise.pipe(function() {
+                        promise = promise.then(function() {
                             return directive.run($el);
                         });
                     }

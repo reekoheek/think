@@ -29,7 +29,7 @@
                 if (!promise) {
                     promise = provider.initialize(app);
                 } else {
-                    promise = promise.pipe(function() {
+                    promise = promise.then(function() {
                         return provider.initialize(app);
                     });
                 }
