@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="manifest.appcache.php" data-interval="0">
 <head>
     <meta charset="UTF-8" />
     <title>Think</title>
@@ -23,11 +23,11 @@
     <link rel="stylesheet" type="text/css" href="vendor/xin/css/xin.css" />
 </head>
 
-<body data-role="app" class="xin-app">
+<body data-role="app" class="think-app">
 
 
     <div class="xin-viewport container">
-        <div data-role="view"
+        <div data-role="think.view.Navbar"
             data-template="vendor/think/templates/navbar.html" class="navbar">
         </div>
 
@@ -38,6 +38,19 @@
                 data-template="vendor/think/templates/login.html"
                 class="v-login">
             </div>
+            <div data-role="think.view.Signup"
+                data-uri="signup"
+                data-template="vendor/think/templates/signup.html"
+                class="v-signup"
+                data-model="app.user">
+            </div>
+
+            <!-- require login here -->
+            <div data-role="think.view.Menu"
+                data-uri="menu"
+                data-template="vendor/think/templates/menu.html">
+            </div>
+
             <div data-role="think.view.Home"
                 data-uri="home"
                 data-uri-default="true"
@@ -46,33 +59,28 @@
                 <div data-role="think.view.Add"
                     data-collection="app.tasks">
                     <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="subject" placeholder="Subject" />
+                        <div class="input-group">
+                            <input type="text" x-webkit-speech class="form-control" name="subject" placeholder="Subject" />
+                            <span class="input-group-btn">
+                                <input class="btn btn-primary" type="submit" value="+" />
+                            </span>
                         </div>
                     </form>
                 </div>
                 <div data-role="list" data-collection="app.tasks" id="home-list">
-                    <table>
-                        <tr data-role="list-item" class="row">
-                            <td>
-                                <%= model.get('subject') %>
-                            </td>
-                            <td style="width:1px">
-                                <!-- a href="#xxx" class="navbar-toggle">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </a -->
-                                <a href="#remove" data-cid="<%= model.cid %>" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr data-role="list-empty">
-                            <td style="text-align: center" colspan="2">
-                                Empty
-                            </td>
-                        </tr>
-                    </table>
+                    <div data-role="list-item" class="list-item">
+                        <span class="list-item-content"><%= model.get('subject') %></span>
+                        <div class="list-item-right">
+                            <a href="#remove" data-cid="<%= model.cid %>" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div data-role="list-empty">
+                        <div style="text-align: center" colspan="2">
+                            Empty
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,11 +109,13 @@
     <script type="text/javascript" src="vendor/xin/js/xin.provider.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.ioc.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.router.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.data.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.ui.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.fx.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.directive.js"></script>
     <!-- end xin -->
 
     <script type="text/javascript" src="vendor/think/js/app.js"></script>
+    <script type="text/javascript" src="vendor/rcache/rcache.js"></script>
 </body>
 </html>

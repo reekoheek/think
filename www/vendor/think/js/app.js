@@ -14,12 +14,6 @@
      */
 
     think.middleware.Auth = function() {
-        this.isAllowed = function() {
-            var user = this.app.get('app.user'),
-                fragment = Backbone.history.getFragment();
-
-            return ['login', 'logout'].indexOf(fragment) >= 0 || user.isLogin();
-        };
 
         this.call = function(options) {
             var deferred = $.Deferred(),
@@ -27,15 +21,17 @@
                 fragment = Backbone.history.getFragment();
 
             if (user.isLogin() && fragment != 'login') {
-                $('.think-user-menu span').html(user.get('username'));
-                $('.think-user-menu').show();
-                $('.think-global-menu').hide();
-            } else {
-                $('.think-user-menu').hide();
-                $('.think-global-menu').show();
+                $('.think-menu-logout span').html(user.get('username'));
             }
 
-            if (this.isAllowed()) {
+
+            if (xin.data.onLine()) {
+                $('.think-online-indicator').removeClass('offline').addClass('online');
+            } else {
+                $('.think-online-indicator').removeClass('online').addClass('offline');
+            }
+
+            if (user.urlAllowed()) {
                 deferred.resolve();
             } else {
                 location.hash = 'login';
@@ -69,9 +65,24 @@
             var tasks = think.model.Task.find(),
                 user = new think.model.User();
 
+            xin.data.beforeSend = function(options) {
+                options.headers = {
+                    'X-Auth-Token': user.get('token')
+                };
+            };
+
             user.on('sync', function() {
                 _.defer(function() {
                     tasks.fetch();
+                });
+            });
+            user.once('sync', function() {
+                xin.data.get('index.php/user/check').fail(function() {
+                    user.logout().done(function() {
+                        if (!user.urlAllowed()) {
+                            location.hash = 'login';
+                        }
+                    });
                 });
             });
             user.fetch();
@@ -88,7 +99,9 @@
 
         this.initialize = function(app) {
             app.router.route('logout', function() {
-                location.hash = 'login';
+                app.get('app.user').logout().done(function() {
+                    location.hash = 'login';
+                });
             });
         };
     };
@@ -128,21 +141,23 @@
             return this.attributes.isLogin || false;
         },
 
+        urlAllowed: function() {
+            var fragment = Backbone.history.getFragment();
+
+            return ['login', 'logout', 'signup'].indexOf(fragment) >= 0 || this.isLogin();
+        },
+
         login: function(login, password) {
             var deferred = $.Deferred(),
                 form = {
-                    username: login,
+                    login: login,
                     password: password
                 },
                 that = this;
 
-            $.ajax({
-                type: 'post',
-                url: 'index.php/user/login',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(form)
-            }).done(function(data) {
+            xin.data
+                .post('index.php/user/login', form)
+                .done(function(data) {
                 var entry = data.entry;
                 entry.isLogin = true;
                 that.set(entry);
@@ -157,26 +172,47 @@
             return deferred.promise();
         },
 
+        signup: function(form) {
+            var deferred = $.Deferred(),
+                that = this;
+
+            xin.data
+                .post('index.php/user/signup', form)
+                .done(function(data) {
+                    var entry = data.entry;
+                    entry.isLogin = true;
+                    that.set(entry);
+                    that.save();
+                    _.defer(function() {
+                        deferred.resolve(that);
+                    });
+                }).fail(function() {
+                    alert('Signup failed!');
+                });
+
+            return deferred.promise();
+        },
+
         logout: function() {
-            var that = this;
-            var next = function() {
+            var that = this,
+                deferred = $.Deferred(),
+                next = function() {
                 that.clear();
                 that.save();
+                _.defer(deferred.resolve);
             };
 
             if (this.get('token')) {
-                $.ajax({
-                    type: 'post',
-                    url: 'index.php/user/logout',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    data: JSON.stringify({token:this.get('token')})
-                }).always(function() {
+                xin.data
+                .get('index.php/user/logout')
+                .always(function() {
                     next();
                 });
             } else {
                 next();
             }
+
+            return deferred.promise();
         }
     });
 
@@ -222,6 +258,40 @@
     });
 
     /**
+     * think.view.Navbar
+     */
+    think.view.Navbar = xin.ui.Outlet.extend({
+        events: {
+            'click [href="#menu"]': 'toggleMenu'
+        },
+
+        toggleMenu: function(evt) {
+            evt.preventDefault();
+
+            if (Backbone.history.getFragment() == 'menu') {
+                location.hash = 'home';
+            } else {
+                location.hash = 'menu';
+            }
+        }
+    });
+
+    /**
+     * think.view.Menu
+     */
+    think.view.Menu = xin.ui.Outlet.extend({
+        events: {
+            'click .think-menu-update': 'updateApp'
+        },
+
+        updateApp: function(evt) {
+            evt.preventDefault();
+            $('html').data('cache').check();
+            location.hash = 'home';
+        }
+    });
+
+    /**
      * think.view.Login
      */
     think.view.Login = xin.ui.Outlet.extend({
@@ -244,6 +314,28 @@
     });
 
     /**
+     * think.view.Signup
+     */
+    think.view.Signup = xin.ui.Outlet.extend({
+        events: {
+            'submit form': 'signup'
+        },
+
+        signup: function(evt) {
+            evt.preventDefault();
+
+            this.$('input').blur();
+
+            var form = this.$('form').serializeObject();
+            this.model.signup(form).done(function() {
+                location.hash = '';
+            }).fail(function(errors) {
+                console.error(errors);
+            });
+        }
+    });
+
+    /**
      * think.view.Add
      */
     think.view.Add = Backbone.View.extend({
@@ -254,10 +346,13 @@
         add: function(evt) {
             evt.preventDefault();
 
+            this.$('input').blur();
+
             var form = this.$('form').serializeObject(),
-                user = this.options.app.get('app.user'),
+                user = this.app.get('app.user'),
                 model;
 
+            // FIXME change to created_by
             form.userId = user.get('$id');
 
             model = new this.collection.model(form);
@@ -282,7 +377,11 @@
             evt.preventDefault();
 
             if (confirm('Are you sure?')) {
-                var cid = $(evt.target).data('cid'),
+                var $target = $(evt.target);
+                if ($target[0].tagName != 'A') {
+                    $target = $target.parents('a').eq(0);
+                }
+                var cid = $target.data('cid'),
                     model = this.collection.get(cid);
 
                 this.collection.remove(model);

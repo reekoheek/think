@@ -137,6 +137,7 @@
                     var $el = instance.$el,
                         $parent = $el.parent('[data-role]');
 
+
                     $el.attr('data-instantiated', true)
                         .data('instance', instance)
                         .attr('data-cid', instance.cid);
@@ -149,6 +150,7 @@
                     }
 
                     if (instance instanceof Backbone.View) {
+                        instance.app = instance.options.app;
                         instance.$el.addClass('xin-view');
                         instance.render();
                     }
@@ -189,6 +191,7 @@
                 content = content.replace(/&lt;%/g, '<%').replace(/%&gt;/g, '%>');
 
                 listView[type + 'Template'] = _.template(content);
+                listView['$' + type + 'AttachPoint'] = $parent;
                 $parent.attr('data-' + type + '-attach-point', true);
 
                 listView.render();

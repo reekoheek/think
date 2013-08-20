@@ -23,7 +23,7 @@
 
 /***************************************************************************/
 
-.xin-app .navbar {
+.think-app .navbar {
     width: 100%;
     line-height: 48px;
     text-align: center;
@@ -31,21 +31,93 @@
     margin-bottom: 0;
 }
 
-/*.xin-app .navbar > div {
+/*.think-app .navbar > div {
     display: none;
 }*/
 
-.xin-app .think-pager > div {
+.think-app .think-pager > div {
     padding-top: 20px;
     display: none;
 }
 
-.xin-app .v-home table {
-    border-collapse: collapse;
-    width: 100%;
+.think-app .list-item {
+    border-bottom: 1px dashed #ddd;
+    height: 46px;
+    overflow: hidden;
+    position: relative;
 }
 
-.xin-app .v-home td {
-    border-bottom: 1px dashed #eee;
-    padding: 5px;
+.think-app .list-item .list-item-content {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 12px;
+    display: block;
+}
+
+.think-app .list-item .list-item-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 0 5px 5px;
+    background-color: white;
+}
+
+.think-online-indicator {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-top: 12px;
+    border-radius: 14px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.think-online-indicator.online {
+    background-color: green;
+}
+
+.think-online-indicator.offline {
+    background-color: red;
+}
+
+.think-list {
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.think-list .row {
+    list-style: none;
+}
+
+.think-list .row a {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.think-list .row a:hover {
+    background-color: #428bca;
+    color: #fff;
+}
+
+.think-global-menu {
+    font-family: "Arial";
+    color: #428bca;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.think-btn-menu {
+    margin-top: 6px;
 }

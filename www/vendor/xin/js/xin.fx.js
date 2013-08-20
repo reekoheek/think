@@ -71,7 +71,7 @@
 
     window.xin.fx = {
         defaultOptions: {
-            delay: 50,
+            delay: 300,
         },
         SlideIn: SlideIn,
         SlideOut: SlideOut,

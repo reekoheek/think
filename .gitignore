@@ -1,3 +1,4 @@
 /composer.lock
 /vendor/*
 /project.sublime-*
+/www/manifest.appcache

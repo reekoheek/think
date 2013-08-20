@@ -124,18 +124,18 @@
             // no template render here
             if (!this.collection.length) {
                 if (this.emptyTemplate) {
-                    this.$('[data-empty-attach-point]').html('');
-                    this.$('[data-item-attach-point]').html('');
+                    this.$emptyAttachPoint.html('');
+                    this.$itemAttachPoint.html('');
 
-                    this.$('[data-empty-attach-point]').html(this.emptyTemplate(this));
+                    this.$emptyAttachPoint.html(this.emptyTemplate(this));
                 }
             } else {
                 if (this.itemTemplate) {
-                    this.$('[data-empty-attach-point]').html('');
-                    this.$('[data-item-attach-point]').html('');
+                    this.$emptyAttachPoint.html('');
+                    this.$itemAttachPoint.html('');
 
                     this.collection.each(_.bind(function(model) {
-                        this.$('[data-item-attach-point]').append(this.itemTemplate({
+                        this.$itemAttachPoint.append(this.itemTemplate({
                             view: this,
                             model: model
                         }));
@@ -152,6 +152,7 @@
             _.defer(function() {
                 if (view.parent && view.parent.showChild) {
                     view.parent.showChild(view).done(function() {
+                        view.$el[0].scrollTop = 0;
                         view.$el.addClass('xin-show');
                     });
                 } else {
