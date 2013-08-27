@@ -7,20 +7,10 @@ use Norm\Schema;
 
 class SchemaProvider {
     public function initialize($app) {
-        Norm::hook('norm.after.factory', function($collection) {
-            switch ($collection->clazz) {
-                case 'User':
-                    $collection->schema(new Schema(array(
-                        'username' => Schema::TYPE_STRING,
-                        'password' => Schema::TYPE_STRING,
-                    )));
-                    break;
-                case 'Task':
-                    $collection->schema(new Schema(array(
-                        'subject' => Schema::TYPE_STRING,
-                    )));
-                    break;
-                default:
+        Norm::hook('norm.after.factory', function($collection) use ($app) {
+            $config = $app->config('schema.schemes');
+            if (isset($config[$collection->clazz])) {
+                $collection->schema(new Schema($config[$collection->clazz]));
             }
         });
     }

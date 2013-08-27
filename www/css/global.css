@@ -2,6 +2,11 @@
     font-size: 20px;
 }*/
 
+div {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
 /***************************************************************************/
 
 .table-holder {
@@ -17,7 +22,7 @@
     color: inherit;
 }
 
-.form-group {
+.input-group, .form-group {
     overflow: auto;
 }
 
@@ -37,21 +42,31 @@
 
 .think-app .think-pager > div {
     padding-top: 20px;
+    padding-bottom: 20px;
     display: none;
 }
 
 .think-app .list-item {
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 1px solid #ddd;
     height: 46px;
     overflow: hidden;
     position: relative;
+    -webkit-backface-visibility: hidden;;
+    /*-webkit-transition: all .3s*/
+}
+
+.think-app .list-item.selected {
+    background-color: rgba(230,230,250,0.7);
+    border: 1px solid #ddd;
 }
 
 .think-app .list-item .list-item-content {
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin: 0 5px;
     margin-top: 12px;
     display: block;
+    overflow: hidden;
 }
 
 .think-app .list-item .list-item-right {
@@ -61,6 +76,33 @@
     padding: 5px 0 5px 5px;
     background-color: white;
 }
+
+.think-app .list-item .list-btn {
+    display: none;
+}
+
+.think-app .list-item .list-btn li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 5px;
+    margin: 0;
+}
+
+.think-app .list-item.active {
+    min-height: 100px;
+    height: auto;
+}
+
+.think-app .list-item.active .list-item-content {
+    white-space: inherit;
+}
+
+.think-app .list-item.active .list-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 0;
+}
+
 
 .think-online-indicator {
     display: block;

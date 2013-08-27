@@ -1,5 +1,7 @@
 <?php
 
+use Norm\Schema;
+
 return array(
 
     'bono.providers' => array(
@@ -19,6 +21,7 @@ return array(
         'mapping' => array(
             'user' => '\\App\\Controllers\\User',
             'task' => NULL,
+            'anu' => NULL,
         ),
     ),
 
@@ -26,6 +29,16 @@ return array(
         'mongo' => array(
             'driver' => '\\Norm\\Connection\\MongoConnection',
             'database' => 'think',
+        ),
+    ),
+
+    'schema.schemes' => array(
+        'User' => array(
+            'username' => Schema::TYPE_STRING,
+            'password' => Schema::TYPE_STRING,
+        ),
+        'Task' => array(
+            'subject' => Schema::TYPE_STRING,
         ),
     ),
 

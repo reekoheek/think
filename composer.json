@@ -15,9 +15,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "App": "src/",
-            "Bono": "../bono/src/",
-            "Norm": "../norm/src/"
+            "App": "src/"
         }
     }
 }

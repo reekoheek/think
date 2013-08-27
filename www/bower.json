@@ -1,0 +1,13 @@
+{
+  "name": "think-frontend",
+  "version": "0.9.0",
+  "ignore": [],
+  "dependencies": {
+    "bootstrap": "~3.0.0",
+    "backbone": "~1.0.0",
+    "underscore": "~1.5.1",
+    "sass-bootstrap-glyphicons": "~1.0.0",
+    "xin": "git@github.com:reekoheek/xin.git",
+    "component-rcache": "git@github.com:reekoheek/component-rcache.git"
+  }
+}

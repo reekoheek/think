@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html manifest="manifest.appcache.php" data-interval="0">
+
 <head>
     <meta charset="UTF-8" />
     <title>Think</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-    <link rel="apple-touch-icon" href="vendor/think/img/favicon.png" />
-    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-ipadh.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />
-    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-ipadv.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />
-    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-iphoneh.png" media="screen and (min-device-width: 321px) and (min-device-width: 480px)" />
-    <link rel="apple-touch-startup-image" href="vendor/think/img/splash/splash-iphonev.png" media="screen and (max-device-width: 320px)" />
+    <link rel="apple-touch-icon" href="img/favicon.png" />
+    <link rel="apple-touch-startup-image" href="img/splash/splash-ipadh.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />
+    <link rel="apple-touch-startup-image" href="img/splash/splash-ipadv.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />
+    <link rel="apple-touch-startup-image" href="img/splash/splash-iphoneh.png" media="screen and (min-device-width: 321px) and (min-device-width: 480px)" />
+    <link rel="apple-touch-startup-image" href="img/splash/splash-iphonev.png" media="screen and (max-device-width: 320px)" />
 
-    <link rel="icon" type="image/ico" href="vendor/think/img/favicon.ico" />
-    <link rel="shortcut icon" type="image/x-ico" href="vendor/think/img/favicon.ico" />
+    <link rel="icon" type="image/ico" href="img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-ico" href="img/favicon.ico" />
 
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap-glyphicons.css" />
-    <link rel="stylesheet" type="text/css" href="vendor/think/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/sass-bootstrap-glyphicons/css/bootstrap-glyphicons.css" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
     <link rel="stylesheet" type="text/css" href="vendor/xin/css/xin.css" />
 </head>
 
@@ -28,19 +29,20 @@
 
     <div class="xin-viewport container">
         <div data-role="think.view.Navbar"
-            data-template="vendor/think/templates/navbar.html" class="navbar">
+            data-template="templates/navbar.html" class="navbar">
         </div>
 
         <div data-role="pager" data-transition="slide" class="think-pager">
             <div data-role="think.view.Login"
                 data-uri="login"
                 data-model="app.user"
-                data-template="vendor/think/templates/login.html"
+                data-template="templates/login.html"
                 class="v-login">
             </div>
+
             <div data-role="think.view.Signup"
                 data-uri="signup"
-                data-template="vendor/think/templates/signup.html"
+                data-template="templates/signup.html"
                 class="v-signup"
                 data-model="app.user">
             </div>
@@ -48,7 +50,7 @@
             <!-- require login here -->
             <div data-role="think.view.Menu"
                 data-uri="menu"
-                data-template="vendor/think/templates/menu.html">
+                data-template="templates/menu.html">
             </div>
 
             <div data-role="think.view.Home"
@@ -59,22 +61,50 @@
                 <div data-role="think.view.Add"
                     data-collection="app.tasks">
                     <form>
-                        <div class="input-group">
-                            <input type="text" x-webkit-speech class="form-control" name="subject" placeholder="Subject" />
+                        <div class="form-group input-group">
+                            <input type="text" x-webkit-speech class="form-control" name="subject" />
                             <span class="input-group-btn">
                                 <input class="btn btn-primary" type="submit" value="+" />
+                                <a href="#full" class="btn btn-success" type="submit">&gt;</a>
                             </span>
                         </div>
                     </form>
                 </div>
                 <div data-role="list" data-collection="app.tasks" id="home-list">
-                    <div data-role="list-item" class="list-item">
+                    <div data-role="list-item" class="list-item" data-view="think.view.ListItem">
                         <span class="list-item-content"><%= model.get('subject') %></span>
-                        <div class="list-item-right">
+                        <!-- div class="list-item-right">
                             <a href="#remove" data-cid="<%= model.cid %>" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
-                        </div>
+                        </div -->
+                        <ul class="list-btn">
+                            <li>
+                                <a href="#full" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-fullscreen"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#due" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-dashboard"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#note" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#subtask" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-tasks"></span>
+                                </a>
+                            </li>
+                            <li class="pull-right">
+                                <a href="#remove" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                     <div data-role="list-empty">
                         <div style="text-align: center" colspan="2">
@@ -86,9 +116,12 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="vendor/zepto/zepto.min.js"></script>
+    <!-- jquery -->
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+    <!-- end jquery -->
 
-    <!-- workaround script to mimick jquery for zepto -->
+    <!-- workaround script to mimick jquery for zepto
+    <script type="text/javascript" src="vendor/zepto/zepto.min.js"></script>
     <script type="text/javascript" src="vendor/zepto/data.js"></script>
     <script type="text/javascript" src="vendor/simply-deferred/deferred.js"></script>
     <script type="text/javascript">
@@ -98,13 +131,14 @@
 
     <!-- underscore and backbone -->
     <script type="text/javascript" src="vendor/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="vendor/backbone/backbone.js"></script>
+    <script type="text/javascript" src="vendor/backbone/backbone-min.js"></script>
     <!-- end underscore and backbone -->
 
-    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- xin -->
     <script type="text/javascript" src="vendor/xin/js/xin.global.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.detect.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.application.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.provider.js"></script>
     <script type="text/javascript" src="vendor/xin/js/xin.ioc.js"></script>
@@ -115,7 +149,7 @@
     <script type="text/javascript" src="vendor/xin/js/xin.directive.js"></script>
     <!-- end xin -->
 
-    <script type="text/javascript" src="vendor/think/js/app.js"></script>
-    <script type="text/javascript" src="vendor/rcache/rcache.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="vendor/component-rcache/rcache.js"></script>
 </body>
 </html>

@@ -11,23 +11,29 @@ class User extends RestController {
     }
 
     public function getUser() {
+        $user = null;
+
         $token = $this->app->request->headers('X-Auth-Token');
         if ($token) {
-            $user = Norm::factory('User')->findOne(array(
-                'token' => $token,
-            ));
+            $criteria = array( '$id' => $token );
+            $token = Norm::factory('Token')->findOne($criteria);
+
+            if ($token) {
+                $user = Norm::factory('User')->findOne(array('$id' => $token->get('user_id')));
+            }
         }
         return $user;
     }
 
     public function generateToken($entry) {
-        $token = Norm::factory('Token')->newInstance();
-        $token->set('user_id', $entry->get('$id'));
+        $criteria = array(
+            'user_id' => $entry->get('$id'),
+            'user_agent' => $this->app->request->getUserAgent(),
+        );
+        Norm::factory('Token')->remove($criteria);
+        $token = Norm::factory('Token')->newInstance($criteria);
         $token->save();
-        $result = $token->getId();
-        $token->remove();
-
-        return $result;
+        return $token->getId();
     }
 
     public function register() {
@@ -45,8 +51,6 @@ class User extends RestController {
                     $user->save();
 
                     $user->set('token', $this->generateToken($user));
-                    $user->save();
-
                     $user->set('password', NULL);
                 }
 
@@ -74,8 +78,6 @@ class User extends RestController {
 
                 if ($entry->get('password') === md5($form['password'])) {
                     $entry->set('token', $this->generateToken($entry));
-                    $entry->save();
-
                     $entry->set('password', NULL);
 
                     return $this->app->data = array(
@@ -94,8 +96,11 @@ class User extends RestController {
                 $entry = $this->getUser();
 
                 if (isset($entry)) {
-                    $entry->set('token', NULL);
-                    $entry->save();
+                    $criteria = array(
+                        'user_id' => $entry->get('$id'),
+                        'user_agent' => $this->app->request->getUserAgent(),
+                    );
+                    Norm::factory('Token')->remove($criteria);
 
                     $entry->set('password', NULL);
 
@@ -111,7 +116,6 @@ class User extends RestController {
             });
 
         });
-
 
         parent::register();
     }

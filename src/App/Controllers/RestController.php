@@ -21,23 +21,42 @@ class RestController extends \Bono\Controller\RestController {
 
     }
 
+    public function getUser() {
+        $user = null;
+
+        $token = $this->app->request->headers('X-Auth-Token');
+        if ($token) {
+            $criteria = array( '$id' => $token );
+            $token = Norm::factory('Token')->findOne($criteria);
+
+            if ($token) {
+                $user = Norm::factory('User')->findOne(array('$id' => $token->get('user_id')));
+            }
+        }
+        return $user;
+    }
+
     public function register() {
 
         // FIXME move this as middleware
         $token = $this->app->request->headers('X-Auth-Token');
-        if ($token) {
-            $user = Norm::factory('User')->findOne(array(
-                'token' => $token,
-            ));
-
-            // FIXME change to created_by
-            if ($user) {
-                Norm::factory($this->clazz)->filter(array('userId' => $user->get('$id')));
-            } else {
-                Norm::factory($this->clazz)->filter(array('userId' => ''));
-            }
+        if (empty($token)) {
+            $this->app->get('/'.$this->name.'.*', function() {
+                $this->app->response->setStatus(401);
+                return $this->app->data = array(
+                    'error' => 'Unauthorized'
+                );
+            });
+            return;
         }
 
+        $user = $this->getUser();
+
+        if ($user) {
+            Norm::factory($this->clazz)->filter(array('user_id' => $user->get('$id')));
+        } else {
+            Norm::factory($this->clazz)->filter(array('user_id' => ''));
+        }
 
         parent::register();
 

@@ -2,3 +2,5 @@
 /vendor/*
 /project.sublime-*
 /www/manifest.appcache
+/www/vendor/*
+/scripts/*
