@@ -3,5 +3,7 @@
 /www/manifest.appcache
 /scripts/*
 /vendor
+/www/css
+/www/js
 node_modules
 bower_components

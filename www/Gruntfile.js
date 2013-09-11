@@ -1,4 +1,3 @@
-require('shelljs/global');
 
 module.exports = function(grunt) {
 
