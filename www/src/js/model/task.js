@@ -13,7 +13,7 @@
         },
 
         parse: function(resp) {
-            if (resp['$type'] || resp['key']) {
+            if (resp.$type || resp.key) {
                 return resp;
             } else {
                 return resp.entry || null;
@@ -33,7 +33,7 @@
                 xhrOptions = { headers: {'X-Auth-Token': xin.app.get('app.user').get('token')} };
 
 
-            taskJournalRepository.all(function(journals) {
+            taskJournalRepository.all(function(err, journals) {
                 _.each(journals, function(action) {
                     var p = $.Deferred();
 
@@ -94,7 +94,8 @@
                 if (!xin.app.get('app.user')) {
                     return;
                 }
-                options.headers = {'X-Auth-Token': xin.app.get('app.user').get('token')};
+                options = _.defaults(options || {}, think.data.defaultOptions);
+                think.data.beforeSend(options);
                 return that.constructor.__super__.sync.apply(that, arguments);
             };
 
@@ -114,7 +115,7 @@
 
                                             whens.push(deferred);
 
-                                            taskRepository.save(o, function(o) {
+                                            taskRepository.save(o, function(err, o) {
                                                 newResp.entries.push(o);
                                                 deferred.resolve();
                                             });
@@ -128,7 +129,7 @@
                                 });
                             });
                         } else {
-                            taskRepository.all(function(entries) {
+                            taskRepository.all(function(err, entries) {
                                 options.success({
                                     entries: entries
                                 });
@@ -144,7 +145,7 @@
 
                             that.syncDirty().done(function() {
                                 options.success = function(resp) {
-                                    taskRepository.save(resp.entry, function(o) {
+                                    taskRepository.save(resp.entry, function(err, o) {
                                         _success.call(null, o);
                                     });
                                 };
@@ -152,7 +153,7 @@
                             });
 
                         } else {
-                            taskRepository.save(modcol.toJSON(), function(o) {
+                            taskRepository.save(modcol.toJSON(), function(err, o) {
                                 modcol.set('key', modcol.id = o.key);
 
                                 taskJournalRepository.save({
@@ -177,7 +178,7 @@
                             var remoteID = modcol.get('$id'),
                                 key = modcol.get('key');
 
-                            taskJournalRepository.all(function(journals) {
+                            taskJournalRepository.all(function(err, journals) {
                                 var keys = [];
                                 _.each(journals, function(journal) {
                                     if (journal.object.key && key == journal.object.key) {

@@ -1,3 +1,42 @@
+(function() {
+
+    window.think = window.think || {};
+
+    var data = window.think.data = {
+        defaultOptions: {
+            dataType: 'json',
+            contentType: 'application/json'
+        },
+
+        get: function(url) {
+            var options = _.defaults({
+                    type: 'get',
+                    url: url
+                }, data.defaultOptions);
+
+            if (data.beforeSend) {
+                data.beforeSend(options);
+            }
+
+            return $.ajax(options);
+        },
+
+        post: function(url, form) {
+            var options = _.defaults({
+                type: 'post',
+                url: url,
+                data: JSON.stringify(form)
+            }, data.defaultOptions);
+
+            if (data.beforeSend) {
+                data.beforeSend(options);
+            }
+
+            return $.ajax(options);
+        }
+    };
+
+})();
 // (function() {
 
 //     "use strict";

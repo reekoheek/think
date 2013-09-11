@@ -1,6 +1,7 @@
 /composer.lock
-/vendor/*
 /project.sublime-*
 /www/manifest.appcache
-/www/vendor/*
 /scripts/*
+/vendor
+node_modules
+bower_components

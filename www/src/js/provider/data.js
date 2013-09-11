@@ -12,10 +12,9 @@
                 deferred = $.Deferred(),
                 deferredRules = [],
                 tasks = think.model.Task.find(),
-                user = new think.model.User(),
-                lawnchair = Lawnchair;
+                user = new think.model.User();
 
-            xin.data.beforeSend = function(options) {
+            think.data.beforeSend = function(options) {
                 options.headers = {
                     'X-Auth-Token': user.get('token')
                 };
@@ -25,21 +24,21 @@
             app.set('app.user', user);
 
             var dUser = $.Deferred();
-            new Lawnchair({name: 'user'}, function(repo) {
+            new xin.data.Repository({name: 'user'}, function(err, repo) {
                 app.set('repository.user', repo);
                 dUser.resolve();
             });
             deferredRules.push(dUser.promise());
 
             var dTask = $.Deferred();
-            new Lawnchair({name: 'task'}, function(repo) {
+            new xin.data.Repository({name: 'task'}, function(err, repo) {
                 app.set('repository.task', repo);
                 dTask.resolve();
             });
             deferredRules.push(dTask.promise());
 
             var dTaskJournal = $.Deferred();
-            new Lawnchair({name: 'taskJournal'}, function(repo) {
+            new xin.data.Repository({name: 'taskJournal'}, function(err, repo) {
                 app.set('repository.taskJournal', repo);
                 dTaskJournal.resolve();
             });

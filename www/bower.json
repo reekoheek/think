@@ -6,7 +6,7 @@
     "bootstrap": "~3.0.0",
     "sass-bootstrap-glyphicons": "~1.0.0",
     "xin": "git@github.com:reekoheek/xin.git#latest",
-    "component-rcache": "git@github.com:reekoheek/component-rcache.git#latest",
-    "lawnchair": "~0.6.3"
+    "xin-data": "git@github.com:reekoheek/xin-data.git#latest",
+    "component-rcache": "git@github.com:reekoheek/component-rcache.git#latest"
   }
 }

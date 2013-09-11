@@ -12,7 +12,7 @@
                 userRepository = app.get('repository.user'),
                 deferred = $.Deferred();
 
-            userRepository.all(function(users) {
+            userRepository.all(function(err, users) {
                 user = users[0] || {};
 
                 switch(method) {
@@ -21,7 +21,8 @@
                         break;
                     case 'create':
                         user = that.toJSON();
-                        userRepository.nuke().save(user);
+                        userRepository.nuke();
+                        userRepository.save(user);
 
                         options.success(user);
                         break;
@@ -54,7 +55,7 @@
                 },
                 that = this;
 
-            xin.data
+            think.data
                 .post('index.php/user/login', form)
                 .done(function(data) {
                 var entry = data.entry;
@@ -75,7 +76,7 @@
             var deferred = $.Deferred(),
                 that = this;
 
-            xin.data
+            think.data
                 .post('index.php/user/signup', form)
                 .done(function(data) {
                     var entry = data.entry;
@@ -98,13 +99,16 @@
             var that = this,
                 deferred = $.Deferred(),
                 next = function() {
-                that.clear();
-                that.save();
-                _.defer(deferred.resolve);
-            };
+                    that.clear();
+                    that.save();
+
+                    app.get('repository.user').nuke();
+
+                    _.defer(deferred.resolve);
+                };
 
             if (this.get('token')) {
-                xin.data
+                think.data
                 .get('index.php/user/logout')
                 .always(function() {
                     next();
