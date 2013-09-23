@@ -1,165 +1,61 @@
-/*body {
-    font-size: 20px;
-}*/
-
-div {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-}
-
-/***************************************************************************/
-
-.table-holder {
-    overflow: auto;
-    margin-bottom: 20px;
-}
-
-.table {
+.v-home .list-item {
     margin-bottom: 0;
-}
-
-.glyphicon {
-    color: inherit;
-}
-
-.input-group, .form-group {
-    overflow: auto;
-}
-
-/***************************************************************************/
-
-.think-app .navbar {
-    width: 100%;
-    line-height: 48px;
-    text-align: center;
-    z-index: 1000;
-    margin-bottom: 0;
-}
-
-/*.think-app .navbar > div {
-    display: none;
-}*/
-
-.think-app .think-pager > div {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: none;
-}
-
-.think-app .list-item {
-    border-bottom: 1px solid #ddd;
-    height: 46px;
-    overflow: hidden;
-    position: relative;
-    -webkit-backface-visibility: hidden;;
-    /*-webkit-transition: all .3s*/
-}
-
-.think-app .list-item.selected {
-    background-color: rgba(230,230,250,0.7);
-    border: 1px solid #ddd;
-}
-
-.think-app .list-item .list-item-content {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 0 5px;
-    margin-top: 12px;
-    display: block;
+    border-top: none;
+    -webkit-transition: all .3s ease;
+    height: 55px;
     overflow: hidden;
 }
 
-.think-app .list-item .list-item-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 5px 0 5px 5px;
-    background-color: white;
-}
-
-.think-app .list-item .list-btn {
-    display: none;
-}
-
-.think-app .list-item .list-btn li {
-    list-style: none;
-    display: inline-block;
-    padding: 0 5px;
-    margin: 0;
-}
-
-.think-app .list-item.active {
-    min-height: 100px;
+.v-home .list-item.selected {
     height: auto;
 }
 
-.think-app .list-item.active .list-item-content {
-    white-space: inherit;
+.v-home .list-item:first-child {
+    border-top: 1px solid #d9d9d9;
 }
 
-.think-app .list-item.active .list-btn {
-    display: block;
-    margin-top: 20px;
-    padding: 0;
+.v-home .list-item .button {
+    margin-bottom: 0;
 }
 
-
-.think-online-indicator {
-    display: block;
-    width: 20px;
-    height: 20px;
-    margin-top: 12px;
-    border-radius: 14px;
-    box-sizing: border-box;
-    margin-left: 5px;
-    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+.v-home .list-item .list-item-button-group {
+    margin-top: 1.25em;
 }
 
-.think-online-indicator.online {
-    background-color: green;
-}
-
-.think-online-indicator.offline {
-    background-color: red;
-}
 
 .think-list {
-    background-color: #f8f8f8;
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    padding: 0;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.think-list .row {
+    margin: 0 20px;
     list-style: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .think-list .row a {
     display: block;
-    background-color: #fff;
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 5px;
-    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-bottom: 0 none;
 }
 
-.think-list .row a:hover {
-    background-color: #428bca;
-    color: #fff;
+.think-list .row:first-child a {
+    border-radius: 10px 10px 0 0;
 }
 
-.think-global-menu {
-    font-family: "Arial";
-    color: #428bca;
-    font-style: italic;
-    font-weight: bold;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+.think-list .row:last-child a {
+    border-bottom: 1px solid #ccc;
+    border-radius: 0 0 10px 10px;
+
 }
 
-.think-btn-menu {
-    margin-top: 6px;
+.hide-default {
+    display: none;
+}
+
+.mode-move .hide-default {
+    display: block;
+}
+
+.mode-move .show-default {
+    display: none;
 }

@@ -20,6 +20,11 @@
             }
         },
 
+        moveTo: function(parent) {
+            this.set('parent_id', parent.id);
+            this.save();
+        },
+
         syncDirty: function() {
             var methodMap = {
                     'create': 'POST',
@@ -115,8 +120,11 @@
 
                                             whens.push(deferred);
 
+                                            delete o.key;
                                             taskRepository.save(o, function(err, o) {
-                                                newResp.entries.push(o);
+                                                if (o.parent_id == that.parent) {
+                                                    newResp.entries.push(o);
+                                                }
                                                 deferred.resolve();
                                             });
                                         });
@@ -198,6 +206,29 @@
                             taskRepository.remove(key);
                         }
                         return;
+                    case 'update':
+                        if (online) {
+                            that.syncDirty().done(function() {
+                                options.success = function(resp) {
+                                    console.log(resp);
+                                    // taskRepository.save(resp.entry, function(err, o) {
+                                    //     _success.call(null, o);
+                                    // });
+                                };
+                                originalSync.call(that, method, modcol, options);
+                            });
+
+                        } else {
+                            // taskRepository.save(modcol.toJSON(), function(err, o) {
+                            //     modcol.set('key', modcol.id = o.key);
+
+                            //     taskJournalRepository.save({
+                            //         method: 'create',
+                            //         object: o
+                            //     });
+                            // });
+                        }
+                        return;
                     default:
                         console.log('sync', 'method', method);
                         console.log('sync', 'modcol', modcol);
@@ -222,6 +253,11 @@
 
             parse: function(resp) {
                 return resp.entries;
+            },
+            setParent: function(parent) {
+                this.parent = parent;
+                this.reset();
+                this.fetch();
             },
             sync: think.model.Task.prototype.sync,
             syncDirty: think.model.Task.prototype.syncDirty

@@ -19,15 +19,14 @@
     <link rel="shortcut icon" type="image/x-ico" href="img/favicon.ico" />
 
     <!-- combine:css css/app.css -->
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/sass-bootstrap-glyphicons/css/bootstrap-glyphicons.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/normalize-css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/zurb-foundation/css/foundation.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/xin/css/xin.css" />
     <link rel="stylesheet" type="text/css" href="src/css/global.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/xin/css/xin.css" />
     <!-- endcombine -->
 </head>
 
 <body data-role="app" class="think-app">
-
 
     <div class="xin-viewport container">
         <div data-role="think.view.Navbar"
@@ -64,41 +63,51 @@
                 <div data-role="think.view.Add"
                     data-collection="app.tasks">
                     <form>
-                        <div class="form-group input-group">
-                            <input type="text" x-webkit-speech class="form-control" name="subject" />
-                            <span class="input-group-btn">
-                                <input class="btn btn-primary" type="submit" value="+" />
-                                <a href="#full" class="btn btn-success" type="submit">&gt;</a>
-                            </span>
+                        <div class="row collapse">
+                            <div class="small-10 columns">
+                                <input type="text" x-webkit-speech name="subject" />
+                            </div>
+                            <div class="small-1 columns">
+                                <input class="small expand button" type="submit" value="+" />
+                            </div>
+                            <div class="small-1 columns">
+                                <a href="#full" class="small expand button" type="submit">&gt;</a>
+                            </div>
                         </div>
                     </form>
                 </div>
+                <div>
+                    <a href="#" class="show-super small button">&lt; Back</a>
+                </div>
                 <div data-role="list" data-collection="app.tasks" id="home-list">
-                    <div data-role="list-item" class="list-item" data-view="think.view.ListItem">
-                        <span class="list-item-content"><%= model.get('subject') %></span>
+                    <div data-role="list-item" class="list-item panel" data-view="think.view.ListItem">
+                        <div class="row list-item-content">
+                            <div class="small-12 columns show-default">
+                                <%= model.get('subject') %>
+                            </div>
+                            <div class="small-10 columns hide-default">
+                                <%= model.get('subject') %>
+                            </div>
+                            <div class="small-2 columns hide-default">
+                                <a href="#movehere" class="small expand button">&gt;&gt;</a>
+                            </div>
+                        </div>
 
-                        <ul class="list-btn">
-                            <li>
-                                <a href="#full" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-fullscreen"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#due" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-dashboard"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#subtask" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-tasks"></span>
-                                </a>
-                            </li>
-                            <li class="pull-right">
-                                <a href="#remove" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
-                            </li>
-                        </ul>
+                        <div class="row collapse list-item-button-group">
+                            <div class="small-3 columns">
+                                <a href="#full" class="small expand button">Full</a>
+                            </div>
+                            <div class="small-3 columns">
+                                <a href="#moveto" class="small expand button">Move To</a>
+                            </div>
+                            <div class="small-3 columns">
+                                <a href="#subtask" class="small expand button">Sub</a>
+                            </div>
+                            <div class="small-3 columns">
+                                <a href="#remove" class="small expand alert button">Remove</a>
+                            </div>
+
+                        </div>
                     </div>
                     <div data-role="list-empty">
                         <div style="text-align: center" colspan="2">
@@ -112,42 +121,37 @@
 
     <!-- combine:js js/app.js -->
 
-    <!-- jquery -->
-    <script type="text/javascript" src="bower_components/jquery/jquery.min.js"></script>
-    <!-- end jquery -->
+    <!-- libs -->
+    <script type="text/javascript" src="vendor/zepto/index.js"></script>
+    <script type="text/javascript" src="vendor/zepto-src/src/data.js"></script>
+    <script type="text/javascript" src="vendor/simply-deferred/deferred.min.js"></script>
+    <script type="text/javascript" src="vendor/lodash/dist/lodash.underscore.min.js"></script>
+    <script type="text/javascript" src="vendor/backbone/backbone-min.js"></script>
+    <!-- end libs -->
 
-    <!-- workaround script to mimick jquery for zepto
-    <script type="text/javascript" src="bower_components/zepto/zepto.min.js"></script>
-    <script type="text/javascript" src="bower_components/zeptojs/src/event.js"></script>
-    <script type="text/javascript" src="bower_components/zeptojs/src/data.js"></script>
-    <script type="text/javascript" src="bower_components/simply-deferred/deferred.min.js"></script>
+    <!-- zepto++
+    <script type="text/javascript" src="vendor/zeptojs/src/event.js"></script>
+    <script type="text/javascript" src="vendor/zeptojs/src/data.js"></script>
     <script type="text/javascript">
         jQuery = $;
     </script>
-    <!-- end workaround script to mimick jquery for zepto -->
-
-    <!-- underscore and backbone -->
-    <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="bower_components/backbone/backbone-min.js"></script>
-    <!-- end underscore and backbone -->
-
-    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- end zepto++ -->
 
     <!-- xin -->
-    <script type="text/javascript" src="bower_components/xin/js/xin.global.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.detect.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.application.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.provider.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.ioc.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.router.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.ui.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.fx.js"></script>
-    <script type="text/javascript" src="bower_components/xin/js/xin.directive.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.global.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.detect.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.application.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.provider.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.ioc.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.router.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.ui.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.fx.js"></script>
+    <script type="text/javascript" src="vendor/xin/js/xin.directive.js"></script>
     <!-- end xin -->
 
     <!-- xin-data -->
-    <script type="text/javascript" src="bower_components/xin-data/src/xin.data.js"></script>
-    <script type="text/javascript" src="bower_components/xin-data/src/adapters/local-storage.js"></script>
+    <script type="text/javascript" src="vendor/xin-data/src/xin.data.js"></script>
+    <script type="text/javascript" src="vendor/xin-data/src/adapters/local-storage.js"></script>
     <!-- end xin-data -->
 
     <script type="text/javascript" src="src/js/global.js"></script>
@@ -170,7 +174,7 @@
     <script type="text/javascript" src="src/js/app.js"></script>
 
     <!-- components -->
-    <script type="text/javascript" src="bower_components/component-rcache/rcache.js"></script>
+    <script type="text/javascript" src="vendor/component-rcache/rcache.js"></script>
     <!-- end components -->
 
     <!-- endcombine -->

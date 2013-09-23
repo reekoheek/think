@@ -1,8 +1,9 @@
 /composer.lock
 /project.sublime-*
 /www/manifest.appcache
-/scripts/*
+/private-bin
 /vendor
+/www/vendor
 /www/css
 /www/js
 node_modules

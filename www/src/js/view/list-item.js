@@ -9,10 +9,22 @@
         events: {
             'click a[href="#remove"]': 'remove',
             'click a[href="#full"]': 'full',
-            // 'click a[href="#note"]': 'note',
+            'click a[href="#moveto"]': 'moveTo',
+            'click a[href="#movehere"]': 'moveHere',
             'click a[href="#due"]': 'due',
             'click a[href="#subtask"]': 'subtask',
             'click': 'select'
+        },
+
+        initialize: function() {
+            xin.ui.Outlet.prototype.initialize.apply(this, arguments);
+            var that = this;
+            Backbone.Events.on('mode-move', function(v) {
+                if (that != v) {
+                    that.$el.addClass('mode-move');
+                    that.moveObject = v;
+                }
+            });
         },
 
         select: function(evt) {
@@ -55,24 +67,27 @@
             comingSoon();
         },
 
-        // note: function(evt) {
-        //     evt.preventDefault();
-        //     evt.stopImmediatePropagation();
+        moveTo: function(evt) {
+            var that = this;
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
 
-        //     comingSoon();
-        // },
+            Backbone.Events.trigger('mode-move', this);
+        },
+
+        moveHere: function(evt) {
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+
+            this.moveObject.model.moveTo(this.model);
+            // this.subtask(evt);
+        },
 
         subtask: function(evt) {
             evt.preventDefault();
-
-            var collection = this.model.collection;
-            console.log(this.model);
-            // collection.parentId = this.model.get('$id');
-            // collection.reset();
-            // collection.fetch();
-
-
             evt.stopImmediatePropagation();
+
+            this.model.collection.setParent(this.model.id);
         },
 
         remove: function(evt) {

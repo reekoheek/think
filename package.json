@@ -7,6 +7,9 @@
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-jafar-task": "0.0.1"
+    "grunt-jafar-task": "~0.0.1",
+    "shelljs": "~0.2.3",
+    "grunt-bower-task": "~0.3.2",
+    "sprintf": "~0.1.2"
   }
 }

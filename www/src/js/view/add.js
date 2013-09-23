@@ -34,6 +34,7 @@
             form.user_id = user.get('$id');
 
             model = new this.collection.model(form);
+            model.set('parent_id', this.collection.parent);
             model.save();
 
             this.collection.add(model);

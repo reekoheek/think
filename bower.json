@@ -1,0 +1,15 @@
+{
+  "name": "think-frontend",
+  "version": "0.9.0",
+  "ignore": [],
+  "dependencies": {
+    "xin": "git@github.com:reekoheek/xin.git#latest",
+    "xin-data": "git@github.com:reekoheek/xin-data.git#latest",
+    "component-rcache": "git@github.com:reekoheek/component-rcache.git#latest",
+    "zurb-foundation": "http://foundation.zurb.com/files/foundation-4.3.1.zip",
+    "lodash": "~1.3.1",
+    "normalize-css": "~2.1.3",
+    "zepto": "http://zeptojs.com/zepto.min.js",
+    "zepto-src": "https://github.com/madrobby/zepto/archive/v1.0.tar.gz"
+  }
+}
