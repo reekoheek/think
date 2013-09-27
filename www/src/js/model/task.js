@@ -89,6 +89,10 @@
             return promise;
         },
 
+        subTaskCount: function() {
+            return '-';
+        },
+
         sync: function(method, modcol, options) {
             var that = this,
                 taskRepository = app.get('repository.task'),

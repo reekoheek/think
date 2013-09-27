@@ -83,10 +83,10 @@
                     <div data-role="list-item" class="list-item panel" data-view="think.view.ListItem">
                         <div class="row list-item-content">
                             <div class="small-12 columns show-default">
-                                <%= model.get('subject') %>
+                                <%= model.get('subject') %> (<%= model.subTaskCount() %>)
                             </div>
                             <div class="small-10 columns hide-default">
-                                <%= model.get('subject') %>
+                                <%= model.get('subject') %> (<%= model.subTaskCount() %>)
                             </div>
                             <div class="small-2 columns hide-default">
                                 <a href="#movehere" class="small expand button">&gt;&gt;</a>

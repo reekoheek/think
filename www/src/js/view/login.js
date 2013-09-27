@@ -6,9 +6,9 @@
      * think.view.Login
      */
     think.view.Login = xin.ui.Outlet.extend({
-        events: {
-            'submit form': 'login'
-        },
+        // events: {
+        //     'submit form': 'login'
+        // },
 
         login: function(evt) {
             evt.preventDefault();
