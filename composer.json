@@ -1,16 +1,21 @@
 {
     "require": {
-        "reekoheek/bono": "dev-master",
-        "reekoheek/norm": "dev-master"
+        "xinix-technology/bono": "dev-master",
+        "xinix-technology/norm": "dev-master",
+        "reekoheek/php-cachemanifest": "~0.0.1"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:reekoheek/bono.git"
+            "url": "git@github.com:xinix-technology/bono.git"
         },
         {
             "type": "vcs",
-            "url": "git@github.com:reekoheek/norm.git"
+            "url": "git@github.com:xinix-technology/norm.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:reekoheek/php-cachemanifest.git"
         }
     ],
     "autoload": {

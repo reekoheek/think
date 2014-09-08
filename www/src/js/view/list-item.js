@@ -25,6 +25,12 @@
                     that.moveObject = v;
                 }
             });
+
+            Backbone.Events.on('mode-default', function(v) {
+                if (that != v) {
+                    that.$el.removeClass('mode-move');
+                }
+            });
         },
 
         select: function(evt) {
@@ -50,6 +56,9 @@
                     $el.addClass('active');
                 }
             }
+
+            Backbone.Events.trigger('mode-default', this);
+
 
         },
 
@@ -80,7 +89,7 @@
             evt.stopImmediatePropagation();
 
             this.moveObject.model.moveTo(this.model);
-            // this.subtask(evt);
+            this.subtask(evt);
         },
 
         subtask: function(evt) {
